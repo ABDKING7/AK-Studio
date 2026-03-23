@@ -23,38 +23,55 @@ html,body{height:100%;overflow:hidden;}
   --sh:0 8px 40px rgba(0,0,0,0.55);
   --sidebar:220px;
 }
-body{background:var(--bg);color:var(--text);font-family:'Cairo',sans-serif;display:flex;}
+[data-theme=light]{
+  --bg:#f2faf5;--bg2:#e6f5ec;
+  --g1:#009940;--g2:#007730;
+  --gdim:rgba(0,153,64,0.08);--gglow:rgba(0,153,64,0.18);
+  --text:#051a0d;--t2:#1d6638;--t3:#4a9466;
+  --bd:rgba(0,153,64,0.12);--bd2:rgba(0,153,64,0.28);
+  --glass:rgba(255,255,255,0.75);
+  --sh:0 8px 40px rgba(0,50,20,0.1);
+}
+body{background:var(--bg);color:var(--text);font-family:'Cairo',sans-serif;display:flex;transition:background .3s,color .3s;}
 body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
-  background-image:linear-gradient(rgba(0,240,96,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(0,240,96,0.03) 1px,transparent 1px);
-  background-size:48px 48px;}
+  background-image:linear-gradient(var(--bd) 1px,transparent 1px),linear-gradient(90deg,var(--bd) 1px,transparent 1px);
+  background-size:48px 48px;opacity:.5;}
 
 /* LOGIN */
 #loginScreen{position:fixed;inset:0;z-index:9999;background:var(--bg);display:flex;align-items:center;justify-content:center;}
-.login-box{background:rgba(8,20,11,0.95);border:1px solid var(--bd2);border-radius:28px;padding:48px;width:360px;
-  box-shadow:var(--sh),0 0 60px rgba(0,240,96,0.06);}
-.login-logo{font-family:'Bebas Neue',sans-serif;font-size:26px;color:var(--g1);letter-spacing:4px;text-align:center;margin-bottom:4px;}
-.login-sub{font-family:'Barlow Condensed',sans-serif;font-size:10px;color:var(--t3);letter-spacing:3px;text-align:center;margin-bottom:32px;text-transform:uppercase;}
+.login-box{background:var(--glass);backdrop-filter:blur(28px);border:1px solid var(--bd2);border-radius:28px;padding:48px;width:360px;box-shadow:var(--sh);}
+.login-logo-wrap{display:flex;align-items:center;justify-content:center;gap:12px;margin-bottom:6px;}
+.login-logo-icon{width:44px;height:44px;}
+.login-logo-text{font-family:'Bebas Neue',sans-serif;font-size:24px;color:var(--g1);letter-spacing:4px;}
+.login-sub{font-family:'Barlow Condensed',sans-serif;font-size:10px;color:var(--t3);letter-spacing:3px;text-align:center;margin-bottom:30px;text-transform:uppercase;}
 .login-label{font-family:'Barlow',sans-serif;font-size:10px;font-weight:700;color:var(--t2);letter-spacing:1.5px;text-transform:uppercase;display:block;margin-bottom:8px;}
-.login-input{width:100%;padding:13px 18px;border-radius:var(--r);background:rgba(255,255,255,0.03);border:1px solid var(--bd);
+.login-input{width:100%;padding:13px 18px;border-radius:var(--r);background:rgba(0,0,0,0.05);border:1px solid var(--bd);
   color:var(--text);font-family:'Barlow Condensed',sans-serif;font-size:20px;letter-spacing:5px;text-align:center;outline:none;transition:all .25s;margin-bottom:18px;}
-.login-input:focus{border-color:var(--g1);background:rgba(0,240,96,0.04);}
+[data-theme=light] .login-input{background:rgba(255,255,255,0.6);}
+.login-input:focus{border-color:var(--g1);background:rgba(0,153,64,0.05);}
 .login-btn{width:100%;padding:14px;border-radius:50px;border:none;background:var(--g1);color:#020e06;
   font-family:'Barlow Condensed',sans-serif;font-size:16px;font-weight:800;letter-spacing:2px;text-transform:uppercase;cursor:pointer;
   box-shadow:0 0 22px var(--gglow);transition:all .3s;}
 .login-btn:hover{transform:translateY(-1px);box-shadow:0 0 36px var(--gglow);}
 .login-err{text-align:center;font-family:'Barlow',sans-serif;font-size:12px;color:var(--red);margin-top:12px;display:none;}
+.theme-toggle-login{position:absolute;top:20px;left:20px;width:36px;height:36px;border-radius:50%;
+  background:var(--gdim);border:1px solid var(--bd);color:var(--text);cursor:pointer;font-size:16px;
+  display:flex;align-items:center;justify-content:center;transition:all .25s;}
+.theme-toggle-login:hover{border-color:var(--g1);}
 
 /* SIDEBAR */
 #sidebar{width:var(--sidebar);height:100vh;flex-shrink:0;position:relative;z-index:10;
-  background:var(--bg2);border-left:1px solid var(--bd);display:flex;flex-direction:column;}
-.sb-logo{padding:26px 20px 20px;border-bottom:1px solid var(--bd);}
-.sb-logo-text{font-family:'Bebas Neue',sans-serif;font-size:18px;color:var(--g1);letter-spacing:3px;}
-.sb-logo-sub{font-family:'Barlow Condensed',sans-serif;font-size:8px;color:var(--t3);letter-spacing:2px;margin-top:2px;text-transform:uppercase;}
+  background:var(--bg2);border-left:1px solid var(--bd);display:flex;flex-direction:column;transition:background .3s;}
+.sb-logo-wrap{padding:20px 18px;border-bottom:1px solid var(--bd);display:flex;align-items:center;gap:10px;}
+.sb-logo-icon{width:34px;height:34px;flex-shrink:0;}
+.sb-logo-text{font-family:'Bebas Neue',sans-serif;font-size:16px;color:var(--g1);letter-spacing:3px;}
+.sb-logo-sub{font-family:'Barlow Condensed',sans-serif;font-size:7px;color:var(--t3);letter-spacing:2px;text-transform:uppercase;}
 .sb-nav{flex:1;padding:14px 10px;display:flex;flex-direction:column;gap:3px;}
 .sb-item{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:var(--rsm);cursor:pointer;transition:all .2s;
   font-family:'Barlow Condensed',sans-serif;font-size:14px;font-weight:600;color:var(--t3);border:1px solid transparent;}
 .sb-item:hover{background:var(--gdim);color:var(--t2);border-color:var(--bd);}
 .sb-item.active{background:rgba(0,240,96,0.09);color:var(--g1);border-color:var(--bd2);}
+[data-theme=light] .sb-item.active{background:rgba(0,153,64,0.09);}
 .sb-badge{margin-right:auto;background:var(--g1);color:#020e06;font-size:9px;font-weight:900;padding:2px 7px;border-radius:50px;}
 .sb-section{font-family:'Barlow',sans-serif;font-size:8px;font-weight:700;color:var(--t3);letter-spacing:2px;text-transform:uppercase;padding:12px 12px 5px;}
 .sb-bottom{padding:14px 10px;border-top:1px solid var(--bd);}
@@ -63,10 +80,14 @@ body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
   font-family:'Bebas Neue',sans-serif;font-size:13px;color:#020e06;flex-shrink:0;}
 .sb-username{font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:700;color:var(--text);}
 .sb-role{font-family:'Barlow',sans-serif;font-size:9px;color:var(--t3);margin-top:1px;}
-.logout-btn{width:100%;margin-top:8px;padding:7px;border-radius:var(--rsm);background:transparent;
+.sb-actions{display:flex;gap:6px;margin-top:8px;}
+.logout-btn{flex:1;padding:7px;border-radius:var(--rsm);background:transparent;
   border:1px solid rgba(255,77,77,0.2);color:rgba(255,100,100,0.6);
   font-family:'Barlow Condensed',sans-serif;font-size:12px;font-weight:700;letter-spacing:1px;cursor:pointer;transition:all .25s;}
 .logout-btn:hover{border-color:var(--red);color:var(--red);}
+.theme-btn{width:32px;height:32px;border-radius:var(--rsm);background:var(--gdim);border:1px solid var(--bd);
+  color:var(--text);cursor:pointer;font-size:15px;display:flex;align-items:center;justify-content:center;transition:all .25s;flex-shrink:0;}
+.theme-btn:hover{border-color:var(--g1);}
 
 /* MAIN */
 #main{flex:1;height:100vh;overflow-y:auto;position:relative;z-index:2;}
@@ -74,7 +95,7 @@ body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
 #main::-webkit-scrollbar-thumb{background:var(--bd2);border-radius:2px;}
 .topbar{position:sticky;top:0;z-index:100;height:60px;padding:0 28px;
   display:flex;align-items:center;justify-content:space-between;
-  background:rgba(7,16,10,0.9);backdrop-filter:blur(20px);border-bottom:1px solid var(--bd);}
+  background:var(--glass);backdrop-filter:blur(20px);border-bottom:1px solid var(--bd);transition:background .3s;}
 .topbar-title{font-family:'Barlow Condensed',sans-serif;font-size:17px;font-weight:700;color:var(--text);letter-spacing:.5px;}
 .topbar-right{display:flex;align-items:center;gap:12px;}
 .tb-time{font-family:'Barlow Condensed',sans-serif;font-size:12px;color:var(--t3);letter-spacing:1px;}
@@ -92,14 +113,12 @@ body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
 /* STATS */
 .stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:20px;}
 .stat-card{background:var(--glass);border:1px solid var(--bd);border-radius:var(--r);padding:20px 18px;
-  backdrop-filter:blur(20px);position:relative;overflow:hidden;transition:all .3s;
-  box-shadow:var(--sh);}
+  backdrop-filter:blur(20px);position:relative;overflow:hidden;transition:all .3s;box-shadow:var(--sh);}
 .stat-card:hover{border-color:var(--bd2);transform:translateY(-2px);}
 .stat-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;
-  background:linear-gradient(90deg,transparent,var(--accent,var(--g1)),transparent);opacity:0;transition:opacity .3s;}
+  background:linear-gradient(90deg,transparent,var(--g1),transparent);opacity:0;transition:opacity .3s;}
 .stat-card:hover::before{opacity:1;}
-.stat-icon{width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;
-  font-size:16px;margin-bottom:12px;border:1px solid var(--bd2);}
+.stat-icon{width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:16px;margin-bottom:12px;border:1px solid var(--bd2);}
 .stat-label{font-family:'Barlow',sans-serif;font-size:9px;font-weight:700;color:var(--t3);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:5px;}
 .stat-num{font-family:'Bebas Neue',sans-serif;font-size:36px;letter-spacing:1px;line-height:1;color:var(--g1);}
 .stat-note{font-family:'Barlow',sans-serif;font-size:10px;color:var(--t3);margin-top:5px;}
@@ -111,23 +130,23 @@ body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
 .panel-title{font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:700;color:var(--text);letter-spacing:1px;text-transform:uppercase;}
 .panel-action{font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:700;color:var(--g1);letter-spacing:1px;
   cursor:pointer;background:var(--gdim);border:1px solid var(--bd2);padding:5px 14px;border-radius:50px;transition:all .2s;}
-.panel-action:hover{background:rgba(0,240,96,0.14);}
+.panel-action:hover{background:rgba(0,153,64,0.14);}
 
 /* TABLE */
 .orders-table{width:100%;border-collapse:collapse;}
 .orders-table th{font-family:'Barlow',sans-serif;font-size:9px;font-weight:700;color:var(--t3);
   letter-spacing:2px;text-transform:uppercase;padding:10px 18px;text-align:right;border-bottom:1px solid var(--bd);}
-.orders-table td{padding:12px 18px;border-bottom:1px solid rgba(0,240,96,0.04);
+.orders-table td{padding:12px 18px;border-bottom:1px solid rgba(0,200,80,0.05);
   font-family:'Cairo',sans-serif;font-size:13px;color:var(--t2);vertical-align:middle;}
-.orders-table tr:hover td{background:rgba(0,240,96,0.02);}
+.orders-table tr:hover td{background:var(--gdim);}
 .orders-table tr:last-child td{border-bottom:none;}
 .client-name{font-family:'Barlow Condensed',sans-serif;font-size:14px;font-weight:700;color:var(--text);}
 .order-type{display:inline-block;background:var(--gdim);border:1px solid var(--bd2);
   font-family:'Barlow',sans-serif;font-size:10px;font-weight:700;color:var(--g1);padding:3px 10px;border-radius:50px;}
 .order-price{font-family:'Bebas Neue',sans-serif;font-size:18px;color:var(--g1);letter-spacing:1px;}
 .status-badge{display:inline-flex;align-items:center;gap:5px;font-family:'Barlow',sans-serif;font-size:10px;font-weight:700;padding:4px 10px;border-radius:50px;}
-.st-new{background:rgba(0,240,96,0.1);border:1px solid rgba(0,240,96,0.25);color:var(--g1);}
-.st-done{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);color:var(--t3);}
+.st-new{background:rgba(0,200,80,0.1);border:1px solid rgba(0,200,80,0.25);color:var(--g1);}
+.st-done{background:rgba(128,128,128,0.08);border:1px solid rgba(128,128,128,0.15);color:var(--t3);}
 .st-paid{background:rgba(77,159,255,0.1);border:1px solid rgba(77,159,255,0.25);color:var(--blue);}
 .dot{width:5px;height:5px;border-radius:50%;}
 .st-new .dot{background:var(--g1);}
@@ -145,7 +164,7 @@ body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
 .quick-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:18px;}
 .chart-bars{display:flex;align-items:flex-end;gap:6px;height:76px;padding:0 20px 14px;}
 .bar-wrap{flex:1;display:flex;flex-direction:column;align-items:center;gap:5px;}
-.bar{width:100%;border-radius:3px 3px 0 0;background:linear-gradient(to top,#007830,#00f060);min-height:3px;transition:height .6s cubic-bezier(.34,1.56,.64,1);}
+.bar{width:100%;border-radius:3px 3px 0 0;background:linear-gradient(to top,var(--g2),var(--g1));min-height:3px;transition:height .6s cubic-bezier(.34,1.56,.64,1);}
 .bar-label{font-family:'Barlow',sans-serif;font-size:8px;color:var(--t3);}
 
 /* FILTER */
@@ -153,20 +172,22 @@ body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
 .filter-btn{padding:6px 15px;border-radius:50px;border:1px solid var(--bd);background:transparent;color:var(--t3);
   font-family:'Barlow',sans-serif;font-size:11px;font-weight:700;cursor:pointer;transition:all .2s;}
 .filter-btn.on,.filter-btn:hover{border-color:var(--g1);color:var(--g1);background:var(--gdim);}
-.search-input{margin-right:auto;padding:7px 13px;border-radius:50px;background:rgba(255,255,255,0.03);
+.search-input{margin-right:auto;padding:7px 13px;border-radius:50px;background:rgba(0,0,0,0.04);
   border:1px solid var(--bd);color:var(--text);font-family:'Cairo',sans-serif;font-size:12px;outline:none;transition:all .2s;width:190px;}
+[data-theme=light] .search-input{background:rgba(255,255,255,0.6);}
 .search-input:focus{border-color:var(--g1);}
 
 /* SERVICES */
 .services-list{display:flex;flex-direction:column;gap:10px;padding:18px;}
-.service-row{background:rgba(255,255,255,0.02);border:1px solid var(--bd);border-radius:var(--rsm);
+.service-row{background:rgba(0,0,0,0.03);border:1px solid var(--bd);border-radius:var(--rsm);
   padding:14px 18px;display:flex;align-items:center;gap:14px;transition:all .25s;}
+[data-theme=light] .service-row{background:rgba(255,255,255,0.5);}
 .service-row:hover{border-color:var(--bd2);}
 .svc-icon{width:38px;height:38px;border-radius:10px;font-size:17px;display:flex;align-items:center;
   justify-content:center;background:var(--gdim);border:1px solid var(--bd2);flex-shrink:0;}
 .svc-name{font-family:'Barlow Condensed',sans-serif;font-size:14px;font-weight:700;color:var(--text);}
 .svc-desc{font-family:'Barlow',sans-serif;font-size:11px;color:var(--t3);margin-top:1px;}
-.svc-price-edit{padding:7px 10px;border-radius:var(--rsm);background:rgba(255,255,255,0.03);
+.svc-price-edit{padding:7px 10px;border-radius:var(--rsm);background:rgba(0,0,0,0.04);
   border:1px solid var(--bd);color:var(--g1);font-family:'Bebas Neue',sans-serif;font-size:18px;
   outline:none;width:66px;text-align:center;letter-spacing:1px;transition:all .2s;}
 .svc-price-edit:focus{border-color:var(--g1);}
@@ -180,9 +201,10 @@ body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
   padding-bottom:10px;border-bottom:1px solid var(--bd);}
 .setting-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;gap:10px;}
 .setting-label{font-family:'Barlow',sans-serif;font-size:12px;font-weight:600;color:var(--t2);white-space:nowrap;}
-.setting-input{padding:8px 13px;border-radius:var(--rsm);background:rgba(255,255,255,0.03);border:1px solid var(--bd);
+.setting-input{padding:8px 13px;border-radius:var(--rsm);background:rgba(0,0,0,0.04);border:1px solid var(--bd);
   color:var(--text);font-family:'Cairo',sans-serif;font-size:12px;outline:none;transition:all .2s;flex:1;}
-.setting-input:focus{border-color:var(--g1);background:rgba(0,240,96,0.04);}
+[data-theme=light] .setting-input{background:rgba(255,255,255,0.6);}
+.setting-input:focus{border-color:var(--g1);}
 .save-btn{padding:9px 18px;border-radius:50px;border:none;background:var(--g1);color:#020e06;
   font-family:'Barlow Condensed',sans-serif;font-size:12px;font-weight:800;letter-spacing:1px;cursor:pointer;transition:all .25s;}
 .save-btn:hover{box-shadow:0 0 18px var(--gglow);}
@@ -193,12 +215,13 @@ body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
 .toggle.on .toggle-knob{transform:translateX(-16px);}
 
 /* ORDER DETAIL MODAL */
-#orderModal{display:none;position:fixed;inset:0;z-index:3000;background:rgba(0,0,0,.82);
+#orderModal{display:none;position:fixed;inset:0;z-index:3000;background:rgba(0,0,0,.75);
   backdrop-filter:blur(16px);align-items:center;justify-content:center;padding:20px;}
 #orderModal.open{display:flex;}
 .order-modal-box{width:100%;max-width:540px;max-height:88vh;overflow-y:auto;
-  background:rgba(7,16,10,0.97);border:1px solid var(--bd2);border-radius:24px;padding:30px;
-  box-shadow:0 40px 100px rgba(0,0,0,.7);scrollbar-width:thin;scrollbar-color:var(--g1) transparent;}
+  background:var(--bg2);border:1px solid var(--bd2);border-radius:24px;padding:30px;
+  box-shadow:0 40px 100px rgba(0,0,0,.6);
+  scrollbar-width:thin;scrollbar-color:var(--g1) transparent;}
 .order-modal-box::-webkit-scrollbar{width:5px;}
 .order-modal-box::-webkit-scrollbar-thumb{background:var(--g1);border-radius:5px;}
 
@@ -207,24 +230,22 @@ body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
   align-items:center;justify-content:center;padding:20px;}
 #lightbox.open{display:flex;}
 #lightbox img{max-width:92vw;max-height:85vh;border-radius:12px;border:1px solid var(--bd2);}
-#lightbox-close{position:fixed;top:18px;left:18px;width:38px;height:38px;border-radius:50%;
+#lbClose{position:fixed;top:18px;left:18px;width:38px;height:38px;border-radius:50%;
   background:rgba(0,240,96,0.1);border:1px solid var(--bd2);color:var(--g1);
   font-size:17px;cursor:pointer;display:flex;align-items:center;justify-content:center;}
 
-/* TOAST */
+/* TOAST + NOTIFY */
 #toast{position:fixed;top:18px;left:50%;transform:translateX(-50%) translateY(-80px);z-index:5000;
-  background:rgba(0,30,12,.97);border:1px solid var(--g1);border-radius:var(--r);
+  background:var(--bg2);border:1px solid var(--g1);border-radius:var(--r);
   padding:14px 22px;display:flex;align-items:center;gap:12px;
-  box-shadow:0 0 40px rgba(0,240,96,.15);transition:all .4s ease;white-space:nowrap;}
+  box-shadow:0 0 40px rgba(0,200,80,.15);transition:all .4s ease;white-space:nowrap;}
 #toast.show{transform:translateX(-50%) translateY(0);}
 .toast-title{font-family:'Bebas Neue',sans-serif;font-size:15px;color:var(--g1);letter-spacing:2px;}
 .toast-sub{font-family:'Barlow',sans-serif;font-size:11px;color:var(--t2);margin-top:2px;}
-
-/* NOTIFY */
 #notify{position:fixed;bottom:24px;left:28px;z-index:5000;
-  background:rgba(0,240,96,0.1);border:1px solid var(--g1);border-radius:var(--r);
+  background:var(--gdim);border:1px solid var(--g1);border-radius:var(--r);
   padding:12px 18px;font-family:'Barlow Condensed',sans-serif;font-size:14px;font-weight:700;
-  color:var(--g1);letter-spacing:.5px;box-shadow:0 0 30px rgba(0,240,96,0.15);
+  color:var(--g1);letter-spacing:.5px;box-shadow:0 0 30px var(--gglow);
   transform:translateY(80px);opacity:0;transition:all .35s ease;backdrop-filter:blur(20px);}
 #notify.show{transform:translateY(0);opacity:1;}
 
@@ -237,9 +258,22 @@ body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
 
 <!-- LOGIN -->
 <div id="loginScreen">
+  <button class="theme-toggle-login" id="loginThemeBtn">🌙</button>
   <div class="login-box">
-    <div class="login-logo">AK STUDIO</div>
-    <div class="login-sub">Control Panel</div>
+    <div class="login-logo-wrap">
+      <svg class="login-logo-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        <rect width="100" height="100" rx="22" fill="#030e07"/>
+        <path d="M15 72 Q50 30 85 22" stroke="#00f060" stroke-width="16" stroke-linecap="round" fill="none" opacity="0.2"/>
+        <line x1="20" y1="76" x2="38" y2="24" stroke="white" stroke-width="8" stroke-linecap="round"/>
+        <line x1="38" y1="24" x2="56" y2="76" stroke="white" stroke-width="8" stroke-linecap="round"/>
+        <line x1="26" y1="54" x2="56" y2="54" stroke="white" stroke-width="6" stroke-linecap="round"/>
+        <line x1="56" y1="54" x2="72" y2="24" stroke="#00f060" stroke-width="8" stroke-linecap="round"/>
+        <line x1="56" y1="54" x2="72" y2="76" stroke="#00f060" stroke-width="8" stroke-linecap="round"/>
+        <circle cx="72" cy="24" r="6" fill="#00f060"/>
+      </svg>
+      <div class="login-logo-text">AK STUDIO</div>
+    </div>
+    <div class="login-sub">Control Panel — لوحة التحكم</div>
     <label class="login-label">كلمة السر — PIN</label>
     <input type="password" class="login-input" id="pinInput" placeholder="••••••••••••••" maxlength="20" autocomplete="off">
     <button class="login-btn" id="loginBtn">دخول — ENTER</button>
@@ -249,8 +283,6 @@ body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
 
 <!-- TOAST -->
 <div id="toast"><span style="font-size:20px">🔥</span><div><div class="toast-title">طلب جديد!</div><div class="toast-sub" id="toastSub"></div></div></div>
-
-<!-- NOTIFY -->
 <div id="notify"></div>
 
 <!-- ORDER DETAIL MODAL -->
@@ -260,15 +292,27 @@ body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
 
 <!-- LIGHTBOX -->
 <div id="lightbox" onclick="closeLB()">
-  <div id="lightbox-close" onclick="closeLB()">✕</div>
+  <div id="lbClose" onclick="closeLB()">✕</div>
   <img id="lbImg" src="" alt="">
 </div>
 
 <!-- SIDEBAR -->
 <div id="sidebar">
-  <div class="sb-logo">
-    <div class="sb-logo-text">AK STUDIO</div>
-    <div class="sb-logo-sub">Control Panel</div>
+  <div class="sb-logo-wrap">
+    <svg class="sb-logo-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+      <rect width="100" height="100" rx="18" fill="#030e07"/>
+      <path d="M15 72 Q50 30 85 22" stroke="#00f060" stroke-width="16" stroke-linecap="round" fill="none" opacity="0.2"/>
+      <line x1="20" y1="76" x2="38" y2="24" stroke="white" stroke-width="7" stroke-linecap="round"/>
+      <line x1="38" y1="24" x2="56" y2="76" stroke="white" stroke-width="7" stroke-linecap="round"/>
+      <line x1="26" y1="54" x2="56" y2="54" stroke="white" stroke-width="5" stroke-linecap="round"/>
+      <line x1="56" y1="54" x2="72" y2="24" stroke="#00f060" stroke-width="7" stroke-linecap="round"/>
+      <line x1="56" y1="54" x2="72" y2="76" stroke="#00f060" stroke-width="7" stroke-linecap="round"/>
+      <circle cx="72" cy="24" r="5" fill="#00f060"/>
+    </svg>
+    <div>
+      <div class="sb-logo-text">AK STUDIO</div>
+      <div class="sb-logo-sub">Control Panel</div>
+    </div>
   </div>
   <div class="sb-nav">
     <div class="sb-item active" data-page="dashboard">📊 Dashboard</div>
@@ -282,7 +326,10 @@ body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
       <div class="sb-avatar">AK</div>
       <div><div class="sb-username">Abd King</div><div class="sb-role">Admin</div></div>
     </div>
-    <button class="logout-btn" id="logoutBtn">تسجيل الخروج</button>
+    <div class="sb-actions">
+      <button class="logout-btn" id="logoutBtn">تسجيل الخروج</button>
+      <button class="theme-btn" id="themeBtn">🌙</button>
+    </div>
   </div>
 </div>
 
@@ -292,23 +339,22 @@ body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
     <div class="topbar-title" id="pageTitle">Dashboard</div>
     <div class="topbar-right">
       <div class="tb-time" id="clock"></div>
-      <a href="index.html" target="_blank" style="padding:6px 14px;border-radius:50px;background:var(--gdim);border:1px solid var(--bd2);color:var(--g1);font-family:'Barlow Condensed',sans-serif;font-size:12px;font-weight:700;cursor:pointer;transition:all .25s;letter-spacing:1px;text-decoration:none;">🌐 الموقع</a>
       <button class="reload-btn" id="reloadBtn">🔄 تحديث</button>
       <div class="tb-dot"></div>
     </div>
   </div>
 
-  <!-- DASHBOARD -->
+  <!-- DASHBOARD PAGE -->
   <div class="page active" id="page-dashboard">
     <div class="stats-grid">
-      <div class="stat-card"><div class="stat-icon" style="background:rgba(0,240,96,0.1);">💰</div><div class="stat-label">الأرباح</div><div class="stat-num" id="sRevenue">$0</div><div class="stat-note" id="sRevenueNote">—</div></div>
-      <div class="stat-card"><div class="stat-icon" style="background:rgba(245,166,35,0.1);">📋</div><div class="stat-label">الطلبات</div><div class="stat-num" id="sTotal" style="color:var(--amber);">0</div><div class="stat-note" id="sTotalNote">—</div></div>
-      <div class="stat-card"><div class="stat-icon" style="background:rgba(77,159,255,0.1);">🔥</div><div class="stat-label">جديدة</div><div class="stat-num" id="sNew" style="color:var(--blue);">0</div><div class="stat-note" id="sNewNote">—</div></div>
-      <div class="stat-card"><div class="stat-icon" style="background:rgba(255,77,77,0.1);">✅</div><div class="stat-label">منجزة</div><div class="stat-num" id="sDone" style="color:var(--red);">0</div><div class="stat-note" id="sDoneNote">—</div></div>
+      <div class="stat-card"><div class="stat-icon" style="background:rgba(0,200,80,0.1)">💰</div><div class="stat-label">الأرباح</div><div class="stat-num" id="sRevenue">$0</div><div class="stat-note" id="sRevenueNote">—</div></div>
+      <div class="stat-card"><div class="stat-icon" style="background:rgba(245,166,35,0.1)">📋</div><div class="stat-label">الطلبات</div><div class="stat-num" id="sTotal" style="color:var(--amber)">0</div><div class="stat-note" id="sTotalNote">—</div></div>
+      <div class="stat-card"><div class="stat-icon" style="background:rgba(77,159,255,0.1)">🔥</div><div class="stat-label">جديدة</div><div class="stat-num" id="sNew" style="color:var(--blue)">0</div><div class="stat-note" id="sNewNote">—</div></div>
+      <div class="stat-card"><div class="stat-icon" style="background:rgba(255,77,77,0.1)">✅</div><div class="stat-label">منجزة</div><div class="stat-num" id="sDone" style="color:var(--red)">0</div><div class="stat-note" id="sDoneNote">—</div></div>
     </div>
     <div class="quick-row">
       <div class="panel"><div class="panel-head"><span class="panel-title">📈 آخر 7 أيام</span></div><div class="chart-bars" id="chartBars"></div></div>
-      <div class="panel"><div class="panel-head"><span class="panel-title">🎯 الأكثر طلباً</span></div><div id="svcBreak" style="padding:12px 20px;display:flex;flex-direction:column;gap:9px;"></div></div>
+      <div class="panel"><div class="panel-head"><span class="panel-title">🎯 الأكثر طلباً</span></div><div id="svcBreak" style="padding:12px 20px;display:flex;flex-direction:column;gap:9px"></div></div>
     </div>
     <div class="panel">
       <div class="panel-head"><span class="panel-title">🕐 آخر الطلبات</span><span class="panel-action" id="viewAllBtn">عرض الكل</span></div>
@@ -316,11 +362,11 @@ body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
     </div>
   </div>
 
-  <!-- ORDERS -->
+  <!-- ORDERS PAGE -->
   <div class="page" id="page-orders">
     <div class="panel">
       <div class="panel-head"><span class="panel-title">📋 جميع الطلبات</span>
-        <div style="display:flex;gap:7px;">
+        <div style="display:flex;gap:7px">
           <span class="panel-action" id="reloadOrdersBtn">🔄 تحديث</span>
           <span class="panel-action" id="clearDoneBtn">حذف المنجزة</span>
         </div>
@@ -337,15 +383,15 @@ body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
     </div>
   </div>
 
-  <!-- SERVICES -->
+  <!-- SERVICES PAGE -->
   <div class="page" id="page-services">
     <div class="panel">
-      <div class="panel-head"><span class="panel-title">🎨 الخدمات والأسعار</span><span class="panel-action" id="saveServicesBtn">حفظ التغييرات</span></div>
+      <div class="panel-head"><span class="panel-title">🎨 الخدمات والأسعار</span><span class="panel-action" id="saveServicesBtn">حفظ وتحديث الموقع</span></div>
       <div class="services-list" id="servicesList"></div>
     </div>
   </div>
 
-  <!-- SETTINGS -->
+  <!-- SETTINGS PAGE -->
   <div class="page" id="page-settings">
     <div class="settings-grid">
       <div class="setting-panel">
@@ -357,28 +403,27 @@ body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
       <div class="setting-panel">
         <div class="setting-title">💳 PayPal</div>
         <div class="setting-row"><span class="setting-label">PayPal.me</span><input class="setting-input" id="paypalInput" placeholder="ABDKING"></div>
-        <button class="save-btn" id="savePaypalBtn">حفظ</button>
-        <div style="margin-top:12px;font-family:'Barlow',sans-serif;font-size:11px;color:var(--t3);">paypal.me/<span id="paypalPreview" style="color:var(--g1)">ABDKING</span></div>
+        <button class="save-btn" id="savePaypalBtn">حفظ وتحديث الموقع</button>
+        <div style="margin-top:12px;font-family:'Barlow',sans-serif;font-size:11px;color:var(--t3)">paypal.me/<span id="paypalPreview" style="color:var(--g1)">ABDKING</span></div>
       </div>
       <div class="setting-panel">
-        <div class="setting-title">📱 التواصل</div>
+        <div class="setting-title">📱 روابط التواصل</div>
         <div class="setting-row"><span class="setting-label">Discord</span><input class="setting-input" id="sDiscord" placeholder="abd___king"></div>
         <div class="setting-row"><span class="setting-label">YouTube</span><input class="setting-input" id="sYoutube" placeholder="@ABDKING_MC"></div>
         <div class="setting-row"><span class="setting-label">Telegram</span><input class="setting-input" id="sTelegram" placeholder="@ABD_KING"></div>
-        <button class="save-btn" id="saveSocialBtn">حفظ</button>
+        <button class="save-btn" id="saveSocialBtn">حفظ وتحديث الموقع</button>
       </div>
       <div class="setting-panel">
         <div class="setting-title">⚙️ الموقع</div>
         <div class="setting-row"><span class="setting-label">قبول الطلبات</span><div class="toggle on" id="tgOrders"><div class="toggle-knob"></div></div></div>
         <div class="setting-row"><span class="setting-label">وضع الصيانة</span><div class="toggle" id="tgMaint"><div class="toggle-knob"></div></div></div>
-        <button class="save-btn" id="clearAllBtn" style="background:rgba(255,77,77,0.15);color:var(--red);box-shadow:none;margin-top:12px;width:100%;border:1px solid rgba(255,77,77,0.3);">⚠️ مسح كل الطلبات</button>
+        <button id="clearAllBtn" style="width:100%;padding:9px;border-radius:50px;border:1px solid rgba(255,77,77,0.3);background:rgba(255,77,77,0.06);color:rgba(255,100,100,0.8);font-family:'Barlow Condensed';font-size:12px;font-weight:800;cursor:pointer;margin-top:12px;letter-spacing:1px">⚠️ مسح كل الطلبات</button>
       </div>
     </div>
   </div>
 </div>
 
 <script>
-// ═══ CONFIG ═══
 const DEFAULT_PIN = 'ABD715932MC10';
 const FB_CONFIG = {
   apiKey: "AIzaSyDlo0FLlvEgu3-bbFSgt-veLzlg4xNcf8k",
@@ -390,44 +435,45 @@ const FB_CONFIG = {
   appId: "1:346732212426:web:7eb26b8e77ca990c04c433"
 };
 
-// ═══ FIREBASE INIT ═══
-let db;
-try {
-  firebase.initializeApp(FB_CONFIG);
-  db = firebase.database();
-} catch(e) { console.error('Firebase init error:', e); }
+let db, orders = [], orderFilter = 'all', lastCount = 0;
+let darkMode = true;
 
-// ═══ STATE ═══
-let orders = [];
-let orderFilter = 'all';
-let lastCount = 0;
+try { firebase.initializeApp(FB_CONFIG); db = firebase.database(); } catch(e) { console.error(e); }
 
-// ═══ HELPERS ═══
 function getPin() { return localStorage.getItem('ak_pin') || DEFAULT_PIN; }
+
 function notify(msg) {
   const el = document.getElementById('notify');
   el.textContent = msg; el.classList.add('show');
   setTimeout(() => el.classList.remove('show'), 2600);
 }
+
 function showToast(name, type) {
   document.getElementById('toastSub').textContent = (name||'—') + ' · ' + (type||'—');
   const t = document.getElementById('toast');
   t.classList.add('show');
   setTimeout(() => t.classList.remove('show'), 4500);
 }
+
+function toggleTheme() {
+  darkMode = !darkMode;
+  document.documentElement.setAttribute('data-theme', darkMode ? 'dark' : 'light');
+  const icon = darkMode ? '🌙' : '☀️';
+  document.getElementById('themeBtn').textContent = icon;
+  document.getElementById('loginThemeBtn').textContent = icon;
+}
+
 setInterval(() => {
   document.getElementById('clock').textContent = new Date().toLocaleTimeString('ar-SA', {hour:'2-digit',minute:'2-digit',second:'2-digit'});
 }, 1000);
 
-// ═══ LOGIN ═══
 function doLogin() {
   const val = document.getElementById('pinInput').value;
   if (val === getPin()) {
-    document.getElementById('loginScreen').style.transition = 'all .4s';
-    document.getElementById('loginScreen').style.opacity = '0';
-    document.getElementById('loginScreen').style.transform = 'scale(0.97)';
-    setTimeout(() => document.getElementById('loginScreen').style.display = 'none', 400);
-    initFirebaseListeners();
+    const ls = document.getElementById('loginScreen');
+    ls.style.transition = 'all .4s'; ls.style.opacity = '0'; ls.style.transform = 'scale(0.97)';
+    setTimeout(() => ls.style.display = 'none', 400);
+    initFirebase();
     loadSettings();
     renderDashboard();
   } else {
@@ -439,15 +485,14 @@ function doLogin() {
 }
 
 function doLogout() {
-  document.getElementById('loginScreen').style.display = 'flex';
-  document.getElementById('loginScreen').style.opacity = '1';
-  document.getElementById('loginScreen').style.transform = 'scale(1)';
+  document.getElementById('loginScreen').style.cssText = 'display:flex;opacity:1;transform:scale(1)';
   document.getElementById('pinInput').value = '';
 }
 
-// ═══ FIREBASE LISTENERS ═══
-function initFirebaseListeners() {
+function initFirebase() {
   if (!db) return;
+
+  // Orders realtime
   db.ref('orders').on('value', snap => {
     const data = snap.val();
     orders = [];
@@ -465,39 +510,57 @@ function initFirebaseListeners() {
     }
   });
 
+  // Services sync FROM website/other dashboard instances
   db.ref('settings/services').on('value', snap => {
     const d = snap.val();
     if (d && d.data) localStorage.setItem('ak_services', d.data);
   });
 
+  // Config sync
   db.ref('settings/config').on('value', snap => {
     const d = snap.val();
     if (!d) return;
-    if (d.paypal) { document.getElementById('paypalInput').value = d.paypal; document.getElementById('paypalPreview').textContent = d.paypal; localStorage.setItem('ak_paypal', d.paypal); }
-    if (d.social) { try { const s = JSON.parse(d.social); if(s.discord) document.getElementById('sDiscord').value = s.discord; if(s.youtube) document.getElementById('sYoutube').value = s.youtube; if(s.telegram) document.getElementById('sTelegram').value = s.telegram; } catch{} }
+    if (d.paypal) {
+      const el = document.getElementById('paypalInput');
+      if (el) { el.value = d.paypal; document.getElementById('paypalPreview').textContent = d.paypal; }
+      localStorage.setItem('ak_paypal', d.paypal);
+    }
+    if (d.social) {
+      try {
+        const s = JSON.parse(d.social);
+        const sd = document.getElementById('sDiscord');
+        const sy = document.getElementById('sYoutube');
+        const st = document.getElementById('sTelegram');
+        if (sd && s.discord) sd.value = s.discord;
+        if (sy && s.youtube) sy.value = s.youtube;
+        if (st && s.telegram) st.value = s.telegram;
+      } catch {}
+    }
   });
 }
 
-// ═══ NAVIGATION ═══
 function showPage(id) {
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-  document.querySelectorAll('.sb-item').forEach(i => i.classList.remove('active'));
+  document.querySelectorAll('.sb-item[data-page]').forEach(i => i.classList.remove('active'));
   document.getElementById('page-' + id).classList.add('active');
   document.querySelector(`[data-page="${id}"]`).classList.add('active');
-  const titles = {dashboard:'Dashboard · الرئيسية', orders:'الطلبات', services:'الخدمات والأسعار', settings:'الإعدادات'};
+  const titles = {dashboard:'Dashboard', orders:'الطلبات', services:'الخدمات والأسعار', settings:'الإعدادات'};
   document.getElementById('pageTitle').textContent = titles[id] || id;
   if (id === 'dashboard') renderDashboard();
   if (id === 'orders') renderOrders();
   if (id === 'services') renderServices();
 }
 
-// ═══ BADGE ═══
 function updateBadge() {
-  const n = orders.filter(o => !o.done).length;
-  document.getElementById('newBadge').textContent = n;
+  document.getElementById('newBadge').textContent = orders.filter(o => !o.done).length;
 }
 
-// ═══ DASHBOARD ═══
+function badge(o) {
+  if (o.done) return `<span class="status-badge st-done"><span class="dot"></span>منجز</span>`;
+  if (o.paid) return `<span class="status-badge st-paid"><span class="dot"></span>PayPal</span>`;
+  return `<span class="status-badge st-new"><span class="dot"></span>جديد 🔥</span>`;
+}
+
 function renderDashboard() {
   const total = orders.length;
   const newO = orders.filter(o => !o.done).length;
@@ -507,61 +570,53 @@ function renderDashboard() {
   document.getElementById('sTotal').textContent = total;
   document.getElementById('sNew').textContent = newO;
   document.getElementById('sDone').textContent = done;
-  document.getElementById('sRevenueNote').textContent = total ? `من ${total} طلب` : 'لا يوجد طلبات';
+  document.getElementById('sRevenueNote').textContent = total ? `من ${total} طلب` : 'لا يوجد';
   document.getElementById('sTotalNote').textContent = done ? `${done} منجز` : '—';
   document.getElementById('sNewNote').textContent = newO ? `${newO} بانتظار التسليم` : 'كل شي منجز ✓';
   document.getElementById('sDoneNote').textContent = total ? Math.round(done/total*100) + '% إنجاز' : '—';
   updateBadge();
 
-  // Chart
   const days = ['أحد','إثنين','ثلاثاء','أربعاء','خميس','جمعة','سبت'];
   const today = new Date().getDay();
   const dayData = Array(7).fill(0);
-  orders.forEach(o => { const d = Math.floor((Date.now()-(o.id||0))/(86400000)); if(d<7) dayData[6-d]++; });
+  orders.forEach(o => { const d = Math.floor((Date.now()-(o.id||0))/86400000); if(d<7) dayData[6-d]++; });
   const maxD = Math.max(...dayData, 1);
   document.getElementById('chartBars').innerHTML = dayData.map((v,i) => {
     const h = Math.max(4, Math.round(v/maxD*68));
     const di = (today-6+i+7)%7;
-    return `<div class="bar-wrap"><div class="bar" style="height:${h}px" title="${v} طلبات"></div><div class="bar-label">${days[di].slice(0,3)}</div></div>`;
+    return `<div class="bar-wrap"><div class="bar" style="height:${h}px" title="${v}"></div><div class="bar-label">${days[di].slice(0,3)}</div></div>`;
   }).join('');
 
-  // Service breakdown
   const sc = {};
   orders.forEach(o => { const t = o.type||'Other'; sc[t]=(sc[t]||0)+1; });
   const sorted = Object.entries(sc).sort((a,b)=>b[1]-a[1]).slice(0,4);
   document.getElementById('svcBreak').innerHTML = sorted.length ? sorted.map(([n,c]) => {
-    const pct = Math.round(c/total*100);
-    return `<div><div style="display:flex;justify-content:space-between;margin-bottom:4px;"><span style="font-family:'Cairo';font-size:12px;color:var(--t2)">${n}</span><span style="font-family:'Bebas Neue';font-size:14px;color:var(--g1)">${c}</span></div><div style="height:3px;border-radius:2px;background:rgba(0,240,96,0.1)"><div style="height:100%;width:${pct}%;border-radius:2px;background:var(--g1);transition:width .6s"></div></div></div>`;
+    const pct = total ? Math.round(c/total*100) : 0;
+    return `<div><div style="display:flex;justify-content:space-between;margin-bottom:4px"><span style="font-family:Cairo;font-size:12px;color:var(--t2)">${n}</span><span style="font-family:'Bebas Neue';font-size:14px;color:var(--g1)">${c}</span></div><div style="height:3px;border-radius:2px;background:var(--bd)"><div style="height:100%;width:${pct}%;border-radius:2px;background:var(--g1);transition:width .6s"></div></div></div>`;
   }).join('') : '<div style="font-family:Barlow;font-size:13px;color:var(--t3)">لا يوجد طلبات</div>';
 
-  // Recent
-  const recent = orders.slice(0, 5);
+  const recent = orders.slice(0,5);
   document.getElementById('recentOrders').innerHTML = recent.length ? `
-    <table class="orders-table"><thead><tr><th>العميل</th><th>الخدمة</th><th>السعر</th><th>الحالة</th><th>الوقت</th></tr></thead>
+    <table class="orders-table"><thead><tr><th>العميل</th><th>الخدمة</th><th>السعر</th><th>الحالة</th><th>الوقت</th><th></th></tr></thead>
     <tbody>${recent.map(o => `<tr>
       <td><div class="client-name">${o.name||'—'}</div></td>
       <td><span class="order-type">${o.type||'—'}</span></td>
       <td><span class="order-price">${o.price||'—'}</span></td>
       <td>${badge(o)}</td>
-      <td style="font-family:Barlow;font-size:11px;color:var(--t3)">${o.time||'—'}</td>
-    </tr>`).join('')}</tbody></table>` : '<div class="empty"><span>📭</span><p>لا يوجد طلبات بعد</p></div>';
+      <td style="font-family:Barlow;font-size:10px;color:var(--t3)">${o.time||'—'}</td>
+      <td><button class="tbl-btn info" onclick="openOrder('${o._key||''}',${o.id||0})">👁 تفاصيل</button></td>
+    </tr>`).join('')}</tbody></table>`
+    : '<div class="empty"><span>📭</span><p>لا يوجد طلبات بعد</p></div>';
 }
 
-function badge(o) {
-  if (o.done) return `<span class="status-badge st-done"><span class="dot"></span>منجز</span>`;
-  if (o.paid) return `<span class="status-badge st-paid"><span class="dot"></span>PayPal</span>`;
-  return `<span class="status-badge st-new"><span class="dot"></span>جديد 🔥</span>`;
-}
-
-// ═══ ORDERS ═══
 function renderOrders() {
   let list = [...orders];
-  const q = document.getElementById('searchInput').value.toLowerCase();
+  const q = (document.getElementById('searchInput').value||'').toLowerCase();
   if (orderFilter === 'new') list = list.filter(o => !o.done);
   if (orderFilter === 'done') list = list.filter(o => o.done);
   if (orderFilter === 'paid') list = list.filter(o => o.paid);
   if (orderFilter === 'img') list = list.filter(o => o.refImage || o.skin);
-  if (q) list = list.filter(o => (o.name+o.type+o.discord+o.contact+o.details||'').toLowerCase().includes(q));
+  if (q) list = list.filter(o => ((o.name||'')+(o.type||'')+(o.discord||'')+(o.details||'')).toLowerCase().includes(q));
   const el = document.getElementById('ordersBody');
   if (!list.length) { el.innerHTML = '<div class="empty"><span>📭</span><p>لا يوجد طلبات</p></div>'; return; }
   el.innerHTML = `<table class="orders-table"><thead><tr>
@@ -584,10 +639,9 @@ function renderOrders() {
 function toggleDone(key, id) {
   const o = orders.find(x => x._key===key || x.id===id);
   if (!o) return;
-  const newDone = !o.done;
-  if (db && key) db.ref('orders/'+key).update({done: newDone});
-  renderOrders(); updateBadge();
-  notify(newDone ? '✅ تم تحديد الطلب كمنجز' : '↩ تم إلغاء الإنجاز');
+  const nd = !o.done;
+  if (db && key) db.ref('orders/'+key).update({done: nd});
+  notify(nd ? '✅ تم تحديد الطلب كمنجز' : '↩ تم إلغاء الإنجاز');
 }
 
 function delOrder(key) {
@@ -598,8 +652,7 @@ function delOrder(key) {
 
 function clearDone() {
   if (!confirm('حذف كل الطلبات المنجزة؟')) return;
-  const done = orders.filter(o => o.done);
-  done.forEach(o => { if(db && o._key) db.ref('orders/'+o._key).remove(); });
+  orders.filter(o => o.done).forEach(o => { if(db && o._key) db.ref('orders/'+o._key).remove(); });
   notify('✅ تم حذف الطلبات المنجزة');
 }
 
@@ -609,42 +662,45 @@ function clearAll() {
   notify('🗑 تم مسح كل الطلبات');
 }
 
-// ═══ ORDER DETAIL ═══
 function openOrder(key, id) {
   const o = orders.find(x => x._key===key || x.id===id);
   if (!o) return;
   document.getElementById('orderModalContent').innerHTML = `
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px">
       <div style="font-family:'Bebas Neue';font-size:20px;color:var(--text);letter-spacing:2px">تفاصيل الطلب</div>
-      <button onclick="closeOrder()" style="width:30px;height:30px;border-radius:50%;background:var(--gdim);border:1px solid var(--bd);color:var(--t2);cursor:pointer;font-size:15px">✕</button>
+      <button onclick="closeOrder()" style="width:30px;height:30px;border-radius:50%;background:var(--gdim);border:1px solid var(--bd);color:var(--t2);cursor:pointer;font-size:15px;display:flex;align-items:center;justify-content:center">✕</button>
     </div>
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px">
-      ${infoBox('العميل', o.name||'—')}
-      ${infoBox('التصميم', o.type||'—', 'var(--g1)')}
-      ${infoBox('السعر', o.price||'—', 'var(--g1)')}
-      ${infoBox('الدفع', o.paid ? '💳 PayPal' : 'بدون دفع', o.paid ? 'var(--blue)' : 'var(--t2)')}
+      ${ib('العميل',o.name||'—')}${ib('التصميم',o.type||'—','var(--g1)')}
+      ${ib('السعر',o.price||'—','var(--g1)')}${ib('الدفع',o.paid?'💳 PayPal':'بدون دفع',o.paid?'var(--blue)':'var(--t2)')}
     </div>
-    ${o.discord&&o.discord!=='—' ? infoFull('Discord', o.discord, 'var(--blue)') : ''}
-    ${o.details&&o.details!=='—' ? infoFull('التفاصيل', o.details) : ''}
-    ${o.imgDesc ? infoFull('وصف الصورة', o.imgDesc, 'var(--text)') : ''}
-    ${o.refImage ? `<div style="margin-bottom:12px"><div style="font-family:'Barlow';font-size:9px;color:var(--t3);letter-spacing:2px;text-transform:uppercase;margin-bottom:8px">الصورة المرجعية</div><img src="${o.refImage}" style="width:100%;border-radius:10px;border:1px solid var(--bd2);cursor:pointer" onclick="openLB('${o.refImage}')"></div>` : ''}
-    ${o.skin ? `<div style="margin-bottom:12px"><div style="font-family:'Barlow';font-size:9px;color:var(--g1);letter-spacing:2px;text-transform:uppercase;margin-bottom:8px">سكن ماينكرافت</div><img src="${o.skin}" style="width:96px;height:96px;object-fit:contain;border-radius:8px;border:1px solid var(--bd2);background:rgba(0,0,0,.3);image-rendering:pixelated;cursor:pointer" onclick="openLB('${o.skin}')"></div>` : ''}
+    ${o.discord&&o.discord!=='—'?if2('Discord',o.discord,'var(--blue)'):''}
+    ${o.details&&o.details!=='—'?if2('التفاصيل',o.details):''}
+    ${o.imgDesc?if2('وصف الصورة',o.imgDesc,'var(--text)'):''}
+    ${o.refImage?`<div style="margin-bottom:12px">
+      <div style="font-family:'Barlow';font-size:9px;color:var(--t3);letter-spacing:2px;text-transform:uppercase;margin-bottom:8px">الصورة المرجعية</div>
+      <img src="${o.refImage}" style="width:100%;border-radius:10px;border:1px solid var(--bd2);cursor:pointer" onclick="openLB('${o.refImage}')">
+    </div>`:''}
+    ${o.skin?`<div style="margin-bottom:12px">
+      <div style="font-family:'Barlow';font-size:9px;color:var(--g1);letter-spacing:2px;text-transform:uppercase;margin-bottom:8px">سكن ماينكرافت</div>
+      <img src="${o.skin}" style="width:96px;height:96px;object-fit:contain;border-radius:8px;border:1px solid var(--bd2);background:rgba(0,0,0,.3);image-rendering:pixelated;cursor:pointer" onclick="openLB('${o.skin}')">
+    </div>`:''}
+    ${!o.refImage&&!o.skin?`<div style="font-family:Barlow;font-size:13px;color:var(--t3);margin-bottom:12px;text-align:center;padding:10px">لا توجد ملفات مرفقة</div>`:''}
     <div style="display:flex;gap:9px;margin-top:4px">
-      <button onclick="toggleDone('${key}',${id});closeOrder()" style="flex:1;padding:11px;border-radius:50px;border:1px solid var(--bd2);background:var(--gdim);color:var(--g1);font-family:'Barlow Condensed';font-size:14px;font-weight:800;cursor:pointer">${o.done?'↩ إلغاء الإنجاز':'✓ تحديد كمنجز'}</button>
-      <button onclick="delOrder('${key}');closeOrder()" style="padding:11px 18px;border-radius:50px;border:1px solid rgba(255,77,77,0.3);background:rgba(255,77,77,0.07);color:rgba(255,100,100,0.8);font-family:'Barlow Condensed';font-size:14px;font-weight:800;cursor:pointer">🗑</button>
+      <button onclick="toggleDone('${o._key||''}',${o.id||0});closeOrder()" style="flex:1;padding:11px;border-radius:50px;border:1px solid var(--bd2);background:var(--gdim);color:var(--g1);font-family:'Barlow Condensed';font-size:14px;font-weight:800;cursor:pointer">${o.done?'↩ إلغاء الإنجاز':'✓ تحديد كمنجز'}</button>
+      <button onclick="delOrder('${o._key||''}');closeOrder()" style="padding:11px 18px;border-radius:50px;border:1px solid rgba(255,77,77,0.3);background:rgba(255,77,77,0.07);color:rgba(255,100,100,0.8);font-family:'Barlow Condensed';font-size:14px;font-weight:800;cursor:pointer">🗑</button>
     </div>
     <div style="font-family:Barlow;font-size:10px;color:var(--t3);text-align:center;margin-top:10px">${o.time||''}</div>`;
   document.getElementById('orderModal').classList.add('open');
 }
 
-function infoBox(label, val, color) {
+function ib(label, val, color) {
   return `<div style="background:var(--gdim);border:1px solid var(--bd);border-radius:10px;padding:12px 14px">
     <div style="font-family:'Barlow';font-size:9px;color:var(--t3);letter-spacing:2px;text-transform:uppercase;margin-bottom:4px">${label}</div>
     <div style="font-family:'Bebas Neue';font-size:16px;color:${color||'var(--text)'};letter-spacing:1px">${val}</div>
   </div>`;
 }
-
-function infoFull(label, val, color) {
+function if2(label, val, color) {
   return `<div style="background:var(--gdim);border:1px solid var(--bd);border-radius:10px;padding:12px 14px;margin-bottom:10px">
     <div style="font-family:'Barlow';font-size:9px;color:var(--t3);letter-spacing:2px;text-transform:uppercase;margin-bottom:6px">${label}</div>
     <div style="font-family:'Cairo';font-size:13px;color:${color||'var(--t2)'};line-height:1.6">${val}</div>
@@ -655,7 +711,6 @@ function closeOrder() { document.getElementById('orderModal').classList.remove('
 function openLB(src) { document.getElementById('lbImg').src = src; document.getElementById('lightbox').classList.add('open'); }
 function closeLB() { document.getElementById('lightbox').classList.remove('open'); }
 
-// ═══ SERVICES ═══
 const defaultServices = [
   {id:'avatar',name:'Avatar / PFP',icon:'👤',desc:'أفاتار احترافي',price:2},
   {id:'thumb',name:'Thumbnail',icon:'🖼️',desc:'ثمبنيل سينمائي',price:3},
@@ -664,8 +719,7 @@ const defaultServices = [
   {id:'custom',name:'Custom Order',icon:'✏️',desc:'حسب الطلب',price:0},
   {id:'rush',name:'Rush 12H',icon:'⚡',desc:'تسليم سريع',price:2},
 ];
-
-function getServices() { try { return JSON.parse(localStorage.getItem('ak_services')||'null') || defaultServices; } catch { return defaultServices; } }
+function getServices() { try { return JSON.parse(localStorage.getItem('ak_services')||'null')||defaultServices; } catch { return defaultServices; } }
 
 function renderServices() {
   document.getElementById('servicesList').innerHTML = getServices().map(s => `
@@ -684,10 +738,9 @@ function saveServices() {
   svcs.forEach(s => { const el = document.getElementById('svc_'+s.id); if(el) s.price = parseFloat(el.value)||0; });
   localStorage.setItem('ak_services', JSON.stringify(svcs));
   if (db) db.ref('settings/services').update({data: JSON.stringify(svcs), updated: Date.now()});
-  notify('✅ تم حفظ الأسعار');
+  notify('✅ تم حفظ الأسعار — سيتغير على الموقع فوراً');
 }
 
-// ═══ SETTINGS ═══
 function loadSettings() {
   const pp = localStorage.getItem('ak_paypal');
   if (pp) { document.getElementById('paypalInput').value = pp; document.getElementById('paypalPreview').textContent = pp; }
@@ -731,30 +784,18 @@ function saveSocial() {
   notify('✅ تم حفظ روابط التواصل');
 }
 
-// ═══ EVENT LISTENERS (after DOM ready) ═══
 document.addEventListener('DOMContentLoaded', function() {
-  // Login
   document.getElementById('loginBtn').addEventListener('click', doLogin);
   document.getElementById('pinInput').addEventListener('keydown', e => { if(e.key==='Enter') doLogin(); });
   document.getElementById('logoutBtn').addEventListener('click', doLogout);
-
-  // Nav
+  document.getElementById('themeBtn').addEventListener('click', toggleTheme);
+  document.getElementById('loginThemeBtn').addEventListener('click', toggleTheme);
   document.querySelectorAll('.sb-item[data-page]').forEach(item => {
     item.addEventListener('click', () => showPage(item.getAttribute('data-page')));
   });
-
-  // Reload
-  document.getElementById('reloadBtn').addEventListener('click', () => {
-    renderDashboard(); renderOrders(); notify('🔄 تم التحديث');
-  });
-  document.getElementById('reloadOrdersBtn').addEventListener('click', () => {
-    renderOrders(); notify('🔄 تم التحديث');
-  });
-
-  // View all
+  document.getElementById('reloadBtn').addEventListener('click', () => { renderDashboard(); renderOrders(); notify('🔄 تم التحديث'); });
+  document.getElementById('reloadOrdersBtn').addEventListener('click', () => { renderOrders(); notify('🔄 تم التحديث'); });
   document.getElementById('viewAllBtn').addEventListener('click', () => showPage('orders'));
-
-  // Filter buttons
   document.querySelectorAll('.filter-btn').forEach(btn => {
     btn.addEventListener('click', () => {
       document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('on'));
@@ -763,48 +804,16 @@ document.addEventListener('DOMContentLoaded', function() {
       renderOrders();
     });
   });
-
-  // Search
   document.getElementById('searchInput').addEventListener('input', renderOrders);
-
-  // Orders actions
   document.getElementById('clearDoneBtn').addEventListener('click', clearDone);
   document.getElementById('saveServicesBtn').addEventListener('click', saveServices);
-
-  // Settings
   document.getElementById('changePinBtn').addEventListener('click', changePin);
   document.getElementById('savePaypalBtn').addEventListener('click', savePaypal);
   document.getElementById('saveSocialBtn').addEventListener('click', saveSocial);
   document.getElementById('clearAllBtn').addEventListener('click', clearAll);
-
-  // Toggles — synced with Firebase
-  document.getElementById('tgOrders').addEventListener('click', function() {
-    this.classList.toggle('on');
-    const val = this.classList.contains('on');
-    if(db) db.ref('settings/config').update({ordersOpen: val});
-    notify(val ? '✅ قبول الطلبات: مفعّل' : '🔴 قبول الطلبات: موقوف');
-  });
-  document.getElementById('tgMaint').addEventListener('click', function() {
-    this.classList.toggle('on');
-    const val = this.classList.contains('on');
-    if(db) db.ref('settings/config').update({maintenance: val});
-    notify(val ? '🔧 وضع الصيانة: مفعّل' : '✅ وضع الصيانة: موقوف');
-  });
+  document.getElementById('tgOrders').addEventListener('click', function() { this.classList.toggle('on'); });
+  document.getElementById('tgMaint').addEventListener('click', function() { this.classList.toggle('on'); });
 });
-
-// Load toggle states from Firebase
-if(db) {
-  db.ref('settings/config').on('value', snap => {
-    const d = snap.val();
-    if(!d) return;
-    if(typeof d.ordersOpen !== 'undefined') {
-      document.getElementById('tgOrders').classList.toggle('on', d.ordersOpen);
-    }
-    if(typeof d.maintenance !== 'undefined') {
-      document.getElementById('tgMaint').classList.toggle('on', d.maintenance);
-    }
-  });
-}
 </script>
 </body>
 </html>
