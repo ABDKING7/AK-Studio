@@ -4,7 +4,7 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://abdking7.github.io/AK-Studio/">
     <meta property="og:site_name" content="AK Studio">
-    <meta property="og:title" content="AK Studio | استوديو إبداعي لماينكرافت ">
+    <meta property="og:title" content="AK Studio | استوديو إبداعي لماينكرافت">
     <meta property="og:description" content="تصاميم سينمائية ترفع من مستوى قناتك. نقدّم (ثمبنيل، بانر، وافاتار ) باحترافية عالية وتسليم سريع. Cinematic designs to elevate your channel. Professional thumbnails, banners, and avatars with fast delivery.">
     
     <!-- تأكد أن اسم ملف الأيقونة في GitHub هو icon.png -->
@@ -678,4 +678,38 @@ var N=PMAP.length,ANGLE=360/N;
   var scene=document.getElementById('carouselScene');var dots=document.getElementById('cDots');
   var r=Math.round(440/(2*Math.tan(Math.PI/N)));scene._r=r;
   PMAP.forEach(function(k,i){
-    var card=document.createEle
+    var card=document.createElement('div');card.className='c-card'+(i===0?' active':'');
+    card.style.cssText='transform:rotateY('+(i*ANGLE)+'deg) translateZ('+r+'px);border:1.5px solid '+(i===0?'rgba(0,232,90,0.4)':'rgba(255,255,255,0.12)');
+    card.innerHTML='<img src="'+IMGS[k]+'" alt="'+PLABELS[i]+'"><div class="c-card-info"><div class="c-cat">'+PCATS[i]+'</div><div class="c-name">'+PLABELS[i]+'</div></div>';
+    scene.appendChild(card);
+    var dot=document.createElement('div');dot.className='c-dot'+(i===0?' on':'');
+    dot.addEventListener('click',(function(idx){return function(){goTo(idx);};})(i));dots.appendChild(dot);
+  });
+  applyT();startAuto();
+})();
+
+function applyT(){var s=document.getElementById('carouselScene');s.style.transform='translateZ(-'+s._r+'px) rotateY('+curAngle+'deg)';}
+function goTo(idx){
+  curIdx=((idx%N)+N)%N;curAngle=-curIdx*ANGLE;applyT();
+  document.querySelectorAll('.c-card').forEach(function(c,i){
+    c.classList.toggle('active',i===curIdx);
+    c.style.borderColor=i===curIdx?'rgba(0,232,90,0.5)':'rgba(255,255,255,0.12)';
+  });
+  document.querySelectorAll('.c-dot').forEach(function(d,i){d.classList.toggle('on',i===curIdx);});
+}
+function rotateC(dir){goTo(curIdx+dir);resetAuto();}
+function startAuto(){autoTimer=setInterval(function(){rotateC(1);},4500);}
+function resetAuto(){clearInterval(autoTimer);startAuto();}
+document.getElementById('prevBtn').addEventListener('click',function(){rotateC(-1);});
+document.getElementById('nextBtn').addEventListener('click',function(){rotateC(1);});
+var cw=document.getElementById('carouselWrap');
+cw.addEventListener('mousedown',function(e){isDragging=true;startX=e.clientX;startAngle=curAngle;clearInterval(autoTimer);});
+document.addEventListener('mousemove',function(e){if(!isDragging)return;curAngle=startAngle+(e.clientX-startX)*0.45;applyT();});
+document.addEventListener('mouseup',function(e){if(!isDragging)return;isDragging=false;var dx=e.clientX-startX;goTo(curIdx-Math.round(dx/(360/N)));resetAuto();});
+cw.addEventListener('touchstart',function(e){isDragging=true;startX=e.touches[0].clientX;startAngle=curAngle;clearInterval(autoTimer);},{passive:true});
+cw.addEventListener('touchmove',function(e){if(!isDragging)return;curAngle=startAngle+(e.touches[0].clientX-startX)*0.45;applyT();},{passive:true});
+cw.addEventListener('touchend',function(e){if(!isDragging)return;isDragging=false;var dx=e.changedTouches[0].clientX-startX;goTo(curIdx-Math.round(dx/(360/N)));resetAuto();});
+document.addEventListener('keydown',function(e){if(e.key==='ArrowLeft')rotateC(1);if(e.key==='ArrowRight')rotateC(-1);});
+</script>
+</body>
+</html>
