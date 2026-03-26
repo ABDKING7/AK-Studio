@@ -126,6 +126,80 @@ body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
 .tb-time{font-family:'Barlow Condensed',sans-serif;font-size:12px;color:var(--t3);letter-spacing:1px;}
 .tb-dot{width:8px;height:8px;border-radius:50%;background:var(--g1);box-shadow:0 0 8px var(--g1);animation:pulse 2s infinite;}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+
+/* ── UI ANIMATIONS ── */
+@keyframes slideInRight{from{opacity:0;transform:translateX(30px);}to{opacity:1;transform:translateX(0);}}
+@keyframes slideInLeft{from{opacity:0;transform:translateX(-30px);}to{opacity:1;transform:translateX(0);}}
+@keyframes slideInUp{from{opacity:0;transform:translateY(24px);}to{opacity:1;transform:translateY(0);}}
+@keyframes scaleIn{from{opacity:0;transform:scale(0.9);}to{opacity:1;transform:scale(1);}}
+@keyframes fadeIn{from{opacity:0;}to{opacity:1;}}
+@keyframes countUp{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:translateY(0);}}
+
+.anim-up{animation:slideInUp .45s cubic-bezier(.34,1.56,.64,1) both;}
+.anim-right{animation:slideInRight .45s cubic-bezier(.34,1.56,.64,1) both;}
+.anim-left{animation:slideInLeft .45s cubic-bezier(.34,1.56,.64,1) both;}
+.anim-scale{animation:scaleIn .45s cubic-bezier(.34,1.56,.64,1) both;}
+.anim-fade{animation:fadeIn .4s ease both;}
+.d1{animation-delay:.05s!important;}
+.d2{animation-delay:.1s!important;}
+.d3{animation-delay:.15s!important;}
+.d4{animation-delay:.2s!important;}
+
+/* Stat card hover */
+.stat-card{cursor:default;transition:transform .35s cubic-bezier(.34,1.56,.64,1),box-shadow .35s,border-color .3s;}
+.stat-card:hover{transform:translateY(-5px) scale(1.03);}
+
+/* Panel hover */
+.panel{transition:box-shadow .3s,border-color .3s;}
+
+/* Sidebar item */
+.sb-item{transition:all .25s cubic-bezier(.34,1.56,.64,1);}
+.sb-item:hover{transform:translateX(-3px);}
+[dir=ltr] .sb-item:hover{transform:translateX(3px);}
+.sb-item.active{transform:translateX(-2px);}
+
+/* Table row */
+.orders-table tr{transition:background .2s;}
+
+/* Tbl btn */
+.tbl-btn{transition:all .25s cubic-bezier(.34,1.56,.64,1);}
+.tbl-btn:hover{transform:scale(1.08);}
+
+/* Filter btn */
+.filter-btn{transition:all .3s cubic-bezier(.34,1.56,.64,1);}
+.filter-btn.on{transform:scale(1.05);}
+
+/* Save btn */
+.save-btn{transition:all .3s cubic-bezier(.34,1.56,.64,1);}
+.save-btn:hover{transform:translateY(-2px) scale(1.04);box-shadow:0 6px 20px var(--gglow);}
+
+/* Reload btn */
+.reload-btn{transition:all .3s cubic-bezier(.34,1.56,.64,1);}
+.reload-btn:hover{transform:scale(1.06);}
+.reload-btn.spin svg{animation:spinIcon .6s linear infinite;}
+@keyframes spinIcon{to{transform:rotate(360deg);}}
+
+/* Login btn */
+.login-btn{transition:all .35s cubic-bezier(.34,1.56,.64,1);}
+.login-btn:hover{transform:translateY(-2px) scale(1.03);}
+
+/* Badge pulse */
+.sb-badge{animation:badgePulse 2.5s ease infinite;}
+@keyframes badgePulse{0%,100%{box-shadow:0 0 0 0 rgba(0,232,90,0.4);}50%{box-shadow:0 0 0 5px rgba(0,232,90,0);}}
+
+/* Page transition */
+.page.active{animation:slideInUp .35s cubic-bezier(.34,1.56,.64,1);}
+
+/* Toggle */
+.toggle{transition:background .3s cubic-bezier(.34,1.56,.64,1);}
+.toggle-knob{transition:transform .3s cubic-bezier(.34,1.56,.64,1);}
+
+/* Order modal */
+.order-modal-box{animation:scaleIn .4s cubic-bezier(.34,1.56,.64,1);}
+
+/* Lightbox */
+#lightbox img{animation:scaleIn .3s ease;}
 .reload-btn{padding:6px 14px;border-radius:50px;background:var(--gdim);border:1px solid var(--bd2);
   color:var(--g1);font-family:'Barlow Condensed',sans-serif;font-size:12px;font-weight:700;
   cursor:pointer;transition:all .25s;letter-spacing:1px;}
@@ -340,11 +414,11 @@ body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
     </div>
   </div>
   <div class="sb-nav">
-    <div class="sb-item active" data-page="dashboard">📊 Dashboard</div>
-    <div class="sb-item" data-page="orders">📋 الطلبات <span class="sb-badge" id="newBadge">0</span></div>
+    <div class="sb-item active" data-page="dashboard" style="animation:slideInRight .4s cubic-bezier(.34,1.56,.64,1) 0.05s both">📊 Dashboard</div>
+    <div class="sb-item" data-page="orders" style="animation:slideInRight .4s cubic-bezier(.34,1.56,.64,1) 0.10s both">📋 الطلبات <span class="sb-badge" id="newBadge">0</span></div>
     <span class="sb-section">الإدارة</span>
-    <div class="sb-item" data-page="services">🎨 الخدمات</div>
-    <div class="sb-item" data-page="settings">⚙️ الإعدادات</div>
+    <div class="sb-item" data-page="services" style="animation:slideInRight .4s cubic-bezier(.34,1.56,.64,1) 0.15s both">🎨 الخدمات</div>
+    <div class="sb-item" data-page="settings" style="animation:slideInRight .4s cubic-bezier(.34,1.56,.64,1) 0.20s both">⚙️ الإعدادات</div>
   </div>
   <div class="sb-bottom">
     <div class="sb-user">
@@ -373,10 +447,10 @@ body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
   <!-- DASHBOARD PAGE -->
   <div class="page active" id="page-dashboard">
     <div class="stats-grid">
-      <div class="stat-card"><div class="stat-icon wave-border" style="background:rgba(0,200,80,0.1);border-radius:10px">💰</div><div class="stat-label">الأرباح</div><div class="stat-num" id="sRevenue">$0</div><div class="stat-note" id="sRevenueNote">—</div></div>
-      <div class="stat-card"><div class="stat-icon wave-border" style="background:rgba(245,166,35,0.1);border-radius:10px">📋</div><div class="stat-label">الطلبات</div><div class="stat-num" id="sTotal" style="color:var(--amber)">0</div><div class="stat-note" id="sTotalNote">—</div></div>
-      <div class="stat-card"><div class="stat-icon wave-border" style="background:rgba(77,159,255,0.1);border-radius:10px">🔥</div><div class="stat-label">جديدة</div><div class="stat-num" id="sNew" style="color:var(--blue)">0</div><div class="stat-note" id="sNewNote">—</div></div>
-      <div class="stat-card"><div class="stat-icon wave-border" style="background:rgba(255,77,77,0.1);border-radius:10px">✅</div><div class="stat-label">منجزة</div><div class="stat-num" id="sDone" style="color:var(--red)">0</div><div class="stat-note" id="sDoneNote">—</div></div>
+      <div class="stat-card anim-up d1"><div class="stat-icon wave-border" style="background:rgba(0,200,80,0.1);border-radius:10px">💰</div><div class="stat-label">الأرباح</div><div class="stat-num" id="sRevenue">$0</div><div class="stat-note" id="sRevenueNote">—</div></div>
+      <div class="stat-card anim-up d2"><div class="stat-icon wave-border" style="background:rgba(245,166,35,0.1);border-radius:10px">📋</div><div class="stat-label">الطلبات</div><div class="stat-num" id="sTotal" style="color:var(--amber)">0</div><div class="stat-note" id="sTotalNote">—</div></div>
+      <div class="stat-card anim-up d3"><div class="stat-icon wave-border" style="background:rgba(77,159,255,0.1);border-radius:10px">🔥</div><div class="stat-label">جديدة</div><div class="stat-num" id="sNew" style="color:var(--blue)">0</div><div class="stat-note" id="sNewNote">—</div></div>
+      <div class="stat-card anim-up d4"><div class="stat-icon wave-border" style="background:rgba(255,77,77,0.1);border-radius:10px">✅</div><div class="stat-label">منجزة</div><div class="stat-num" id="sDone" style="color:var(--red)">0</div><div class="stat-note" id="sDoneNote">—</div></div>
     </div>
     <div class="quick-row">
       <div class="panel"><div class="panel-head"><span class="panel-title">📈 آخر 7 أيام</span></div><div class="chart-bars" id="chartBars"></div></div>
@@ -490,7 +564,11 @@ function toggleTheme() {
 }
 
 setInterval(() => {
-  document.getElementById('clock').textContent = new Date().toLocaleTimeString('ar-SA', {hour:'2-digit',minute:'2-digit',second:'2-digit'});
+  var now = new Date();
+  var h = String(now.getHours()).padStart(2,'0');
+  var m = String(now.getMinutes()).padStart(2,'0');
+  var s = String(now.getSeconds()).padStart(2,'0');
+  document.getElementById('clock').textContent = h + ':' + m + ':' + s;
 }, 1000);
 
 function doLogin() {
@@ -842,6 +920,42 @@ document.addEventListener('DOMContentLoaded', function() {
   if(dtBtn) dtBtn.addEventListener('click', toggleDashTheme);
   document.getElementById('tgMaint').addEventListener('click', function() { this.classList.toggle('on'); });
 });
+
+// ── Animate panels on scroll ──
+(function(){
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){
+        e.target.style.animation = 'slideInUp .5s cubic-bezier(.34,1.56,.64,1) both';
+        io.unobserve(e.target);
+      }
+    });
+  },{threshold:0.08});
+  document.querySelectorAll('.panel,.setting-panel').forEach(function(el){
+    el.style.opacity='0';
+    io.observe(el);
+  });
+  // Re-run on page change
+  window._origShowPage = showPage;
+  window.showPage = function(id){
+    window._origShowPage(id);
+    setTimeout(function(){
+      document.querySelectorAll('#page-'+id+' .panel, #page-'+id+' .setting-panel').forEach(function(el,i){
+        el.style.opacity='0';
+        el.style.animation='none';
+        setTimeout(function(){
+          el.style.animation='slideInUp .45s cubic-bezier(.34,1.56,.64,1) '+(i*0.07)+'s both';
+        },20);
+      });
+      document.querySelectorAll('#page-'+id+' .stat-card').forEach(function(el,i){
+        el.style.animation='none';
+        setTimeout(function(){
+          el.style.animation='slideInUp .45s cubic-bezier(.34,1.56,.64,1) '+(i*0.06)+'s both';
+        },20);
+      });
+    },30);
+  };
+})();
 </script>
 </body>
 </html>
